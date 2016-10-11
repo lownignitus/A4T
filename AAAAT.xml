@@ -1,0 +1,134 @@
+<!-- A4T v1.0.0 -->
+
+
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+..\FrameXML\UI.xsd">
+
+	<Script file="A4T.lua" />
+	<!-- Main Frame -->
+	<Frame name="atFrame" frameStrata="BACKGROUND" clampedToScreen="true" movable="true" parent="UIParent">
+		<Size x="208" y="36" />
+		<Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
+			<BackgroundInsets>
+				<AbsInset left="3" right="3" top="3" bottom="3" />
+			</BackgroundInsets>
+			<TileSize>
+				<AbsValue val="32" />
+			</TileSize>
+			<EdgeSize>
+				<AbsValue val="16" />
+			</EdgeSize>
+		</Backdrop>
+		<Anchors>
+			<Anchor point="CENTER" relativePoint="CENTER" relativeTo="UIParent" />
+		</Anchors>
+		<Frames>
+			<!-- Top lvl Frames -->
+			<Frame name="$parentTitle" frameStrata="BACKGROUND" movable="false" parentKey="title">
+				<Size x="125" y="18" />
+				<Anchors>
+					<Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="$parent" x="10" y="-3" />
+				</Anchors>
+				<Layers>
+					<Layer level="ARTWORK">
+						<FontString name="$parentTitle" font="Fonts\FRIZQT__.TTF" justifyH="CENTER" justifyV="MIDDLE" parentKey="text">
+							<Size>
+								<AbsDimension x="135" y="16" />
+							</Size>
+							<FontHeight val="14" />
+							<Anchors>
+								<Anchor point="CENTER" relativePoint="CENTER" relativeTo="$parent" />
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+			</Frame>
+
+			<!-- Buttons (Lock|X) -->
+			<!-- Close Button -->
+			<Button name="$parentButtonClose" inherits="UIPanelCloseButton" parentKey="buttonClose">
+				<Size x="18" y="18" />
+				<Anchors>
+					<Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="$parent" x="-2" y="-2" />
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						atToggle();
+					</OnClick>
+					<OnEnter>
+						GameTooltip:SetOwner(self, "ANCHOR_TOPRIGHT");
+						GameTooltip:ClearLines();
+						GameTooltip:SetText("Close");
+						GameTooltip:AddLine("Click to hide A4T.");
+						GameTooltip:Show();
+
+						atMouseOverEnter();
+					</OnEnter>
+					<OnLeave>
+						GameTooltip:Hide();
+
+						atMouseOverLeave();
+					</OnLeave>
+				</Scripts>
+			</Button>
+
+			<!-- Lock Button -->
+			<CheckButton name="$parentButtonLock" parentKey="buttonLock">
+				<Size x="18" y="18" />
+				<Anchors>
+					<Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="$parent" x="-14" y="-3" />
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						atLocker();
+					</OnClick>
+					<OnEnter>
+						GameTooltip:SetOwner(self, "ANCHOR_TOPRIGHT");
+						GameTooltip:ClearLines();
+						GameTooltip:SetText("Lock");
+						GameTooltip:AddLine("Click to lock A4T.");
+						GameTooltip:Show();
+
+						atMouseOverEnter();
+					</OnEnter>
+					<OnLeave>
+						GameTooltip:Hide();
+
+						atMouseOverLeave();
+					</OnLeave>
+				</Scripts>
+				<NormalTexture file="Interface\Buttons\LockButton-Locked-Up"/>
+				<PushedTexture file="Interface\Buttons\LockButton-Unlocked-Down"/>
+				<HighlightTexture file="Interface\Buttons\UI-Panel-MinimizeButton-Highlight" alphaMode="ADD"/>
+				<CheckedTexture file="Interface\Buttons\LockButton-Unlocked-Up"/>
+			</CheckButton>
+
+			<Frame name="atDataFrame" movable="false">
+				<Size x="200" y="26" />
+				<Anchors>
+					<Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="atFrame" x="0" y="0" />
+				</Anchors>
+			</Frame>
+		</Frames>
+		
+		<Scripts>
+			<OnLoad>
+				self:RegisterForDrag("LeftButton");
+				PetBattleFrame:HookScript("OnShow",function() self:Hide() end)
+				PetBattleFrame:HookScript("OnHide",function() if atSettings.options.atHidden == false then self:Show() end end)
+			</OnLoad>
+			<OnDragStart>
+				self:StartMoving();
+			</OnDragStart>
+			<OnDragStop>
+				self:StopMovingOrSizing();
+			</OnDragStop>
+			<OnEnter>
+				shMouseOverEnter();
+			</OnEnter>
+			<OnLeave>
+				shMouseOverLeave();
+			</OnLeave>
+		</Scripts>
+	</Frame>
+</Ui>

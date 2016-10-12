@@ -7,6 +7,10 @@ CF = CreateFrame
 local atBarBG = { bgFile = "Interface\\PaperDollInfoFrame\\UI-Character-Skills-Bar", edgeFile = nil, tile = false, tileSize = 32, edgeSize = 0, insets = {left = 0, right = 0, top = 0, bottom = 0}}
 local addon_name = "A4T"
 local y = -15
+local ranLast = false
+local ranLastQ = false
+local count = 0
+local countQ = 0
 SLASH_A4T1 = '/A4T' or '/a4t' or '/A4t' or 'a4T' or '/aaaat' or '/AAAAT'
 
 local atEvents_table = {}
@@ -67,23 +71,36 @@ end
 
 function atEvents_table.eventFrame:QUEST_WATCH_LIST_CHANGED()
 --	print("Quest watch list changed")
-	atUpdateData()
+	if ranLastQ == false then
+		countQ = countQ+1
+		ranLastQ = true
+		if not InCombatLockdown() then
+			atUpdateData()
+		end
+	elseif ranLastQ == true and countQ == 1 then
+		countQ = countQ+1
+		ranLastQ = true
+	else
+		countQ = 0
+		ranLastQ = false
+		if not InCombatLockdown() then
+			atUpdateData()
+		end
+	end	
 end
 
 function atEvents_table.eventFrame:PLAYER_ENTERING_WORLD()
 --	print("Player entering world")
-	local ranLast = false
-	local count = 0
 	if ranLast == false then
 		count = count+1
 		ranLast = true
 		if not InCombatLockdown() then
 			atUpdateData()
 		end
-	elseif ranLast == true and count <= 4 then
+	elseif ranLast == true and count <= 3 then
 		count = count+1
 		ranLast = true
-	elseif ranLast == true and count == 5 then
+	elseif ranLast == true and count == 4 then
 		count = 0
 		ranLast = false
 		if not InCombatLockdown() then

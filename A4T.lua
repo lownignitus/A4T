@@ -340,7 +340,8 @@ function atUpdateData()
 	local pvp = "Player Kills"
 	local ach = {}
 	local a = 0
-	local x,b
+	local b = 0
+	local x = 0
 	for i = 1,11 do
 		_,_,_,x,b = GetAchievementCriteriaInfo(11152,i)
 		a = a+x

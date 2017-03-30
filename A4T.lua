@@ -1,6 +1,6 @@
 -- Title: A4T (AAAAT or Artifact Alternate Appearance Achievement Tracker)
 -- Author: LownIgnitus
--- Version: 1.0.2
+-- Version: 1.0.3
 -- Desc: Frame for tracking Achievemnets tied to progress unlocking artifact hidden appearance extra recolours.
 
 CF = CreateFrame

@@ -342,15 +342,6 @@ function atUpdateData()
 	local a = 0
 	local b = 0
 	local x = 0
-	--[[local a={Dungeons=11152,WQs=11153,PKs=11154}
-	for b,c in pairs(a)do 
-		local d,e=0;
-		for f=1,GetAchievementNumCriteria(c)do 
-			local g,h=0;
-			g,g,g,h,e=GetAchievementCriteriaInfo(c,f)d=d+h 
-		end;
-		print(b..": "..d.."/"..e)
-	end]]
 	for i = 1,GetAchievementNumCriteria(11152) do
 		_,_,_,x,b = GetAchievementCriteriaInfo(11152,i)
 		a = a+x

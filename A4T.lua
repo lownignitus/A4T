@@ -1,6 +1,6 @@
 -- Title: A4T (AAAAT or Artifact Alternate Appearance Achievement Tracker)
 -- Author: LownIgnitus
--- Version: 1.0.4
+-- Version: 1.0.5
 -- Desc: Frame for tracking Achievemnets tied to progress unlocking artifact hidden appearance extra recolours.
 
 CF = CreateFrame
@@ -342,7 +342,16 @@ function atUpdateData()
 	local a = 0
 	local b = 0
 	local x = 0
-	for i = 1,11 do
+	--[[local a={Dungeons=11152,WQs=11153,PKs=11154}
+	for b,c in pairs(a)do 
+		local d,e=0;
+		for f=1,GetAchievementNumCriteria(c)do 
+			local g,h=0;
+			g,g,g,h,e=GetAchievementCriteriaInfo(c,f)d=d+h 
+		end;
+		print(b..": "..d.."/"..e)
+	end]]
+	for i = 1,GetAchievementNumCriteria(11152) do
 		_,_,_,x,b = GetAchievementCriteriaInfo(11152,i)
 		a = a+x
 	end

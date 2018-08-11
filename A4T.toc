@@ -1,9 +1,9 @@
-## Interface: 70300
+## Interface: 80000
 ## Title: |cff00ff00A4T|r
 ## Author: |cffDA70D6LownIgnitus|r Mihkael@US-Alexstrasza
-## Version: |cffFF4500v1.0.4|r
+## Version: |cffFF4500v1.0.6|r
 ## X-Date: 03/12/2017
-## X-Website: https://www.facebook.com/groups/190240457669378/
+## X-Website: https://twitter.com/lownignitus
 ## Notes: Frame for tracking Achievemnets tied to progress unlocking artifact hidden appearance 
 ## X-Notes2: extra recolours.
 ## SavedVariablesPerCharacter: atSettings
